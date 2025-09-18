@@ -215,12 +215,31 @@
       mensagem += `🏠 Endereço: ${endereco}%0A`;
       mensagem += `📋 Tipo: ${tipo === "entrega" ? "Entrega" : "Retirada"}%0A%0A`;
 
-      mensagem += `🥟 *Itens do Pedido:*%0A`;
+      // Separar itens por categoria usando emojis
+      let salgados = "";
+      let doces = "";
+      let adicionais = "";
+
       for (let item in carrinho) {
-        mensagem += `- ${item} (${carrinho[item].quantidade}x)%0A`;
+        if (item.toLowerCase().includes("frango") || item.toLowerCase().includes("carne") || item.toLowerCase().includes("calabresa") || item.toLowerCase().includes("queijo") || item.toLowerCase().includes("bauru")) {
+          salgados += `- ${item} (${carrinho[item].quantidade}x)%0A`;
+        } else if (item.toLowerCase().includes("brigadeiro") || item.toLowerCase().includes("prest") || item.toLowerCase().includes("sens")) {
+          doces += `- ${item} (${carrinho[item].quantidade}x)%0A`;
+        } else {
+          adicionais += `- ${item} (${carrinho[item].quantidade}x)%0A`;
+        }
       }
 
-      mensagem += `%0A💰 Total: R$ ${document.getElementById("total").innerText}`;
+      if (salgados) mensagem += `🥟 *Salgados:*%0A${salgados}%0A`;
+      if (doces) mensagem += `🍫 *Doces:*%0A${doces}%0A`;
+      if (adicionais) mensagem += `➕ *Adicionais:*%0A${adicionais}%0A`;
+
+      if (tipo === "entrega") {
+        mensagem += `🚚 Taxa de Entrega: R$ 3,00%0A`;
+      }
+
+      mensagem += `💰 Total: R$ ${document.getElementById("total").innerText}%0A%0A`;
+      mensagem += `🙏 Obrigado pela preferência!`;
 
       const telefone = "5511983928497"; 
       const url = `https://wa.me/${telefone}?text=${mensagem}`;
