@@ -27,10 +27,13 @@
     }
     .item span:first-child { flex: 1; }
     .item span.price { width: 80px; text-align: right; font-weight: bold; margin-right: 15px; }
-    button { background: #f4a300; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
+    button { background: #f4a300; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; }
     button:hover { background: #d98c00; }
     .carrinho ul { list-style: none; padding: 0; }
-    .carrinho li { background: #fff; padding: 10px; margin: 5px 0; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .carrinho li { background: #fff; padding: 10px; margin: 5px 0; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+    .carrinho .controles { display: flex; gap: 5px; align-items: center; }
+    .carrinho li button { background: #d9534f; }
+    .carrinho li button.qtd { background: #f4a300; }
     .total { font-weight: bold; margin-top: 10px; font-size: 18px; }
     .dados-cliente input, .dados-cliente select { width: 100%; padding: 8px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 5px; }
     footer { text-align:center; background:#f4a300; color:white; padding:15px; margin-top:20px; }
@@ -114,7 +117,7 @@
   </footer>
 
   <script>
-    let total = 0;
+    let carrinho = {};
 
     function mostrarTaxa() {
       const tipo = document.getElementById("tipo").value;
@@ -124,10 +127,14 @@
       } else {
         taxa.style.display = "none";
       }
+      atualizarTotal();
     }
 
     function atualizarTotal() {
-      let valorTotal = total;
+      let valorTotal = 0;
+      for (let item in carrinho) {
+        valorTotal += carrinho[item].quantidade * carrinho[item].preco;
+      }
       const tipo = document.getElementById("tipo").value;
       if (tipo === "entrega") {
         valorTotal += 5; // taxa de entrega
@@ -137,8 +144,61 @@
 
     function limparCarrinho() {
       document.getElementById("lista-carrinho").innerHTML = "";
-      total = 0;
+      carrinho = {};
       atualizarTotal();
+    }
+
+    function atualizarCarrinho() {
+      const lista = document.getElementById("lista-carrinho");
+      lista.innerHTML = "";
+      for (let item in carrinho) {
+        const li = document.createElement("li");
+        const qtd = carrinho[item].quantidade;
+        const precoTotal = carrinho[item].quantidade * carrinho[item].preco;
+        li.textContent = `${item} - ${qtd}x R$ ${precoTotal.toFixed(2).replace(".", ",")}`;
+
+        const controles = document.createElement("div");
+        controles.className = "controles";
+
+        // Botão diminuir
+        const menosBtn = document.createElement("button");
+        menosBtn.textContent = "-";
+        menosBtn.className = "qtd";
+        menosBtn.onclick = function() {
+          if (carrinho[item].quantidade > 1) {
+            carrinho[item].quantidade--;
+          } else {
+            delete carrinho[item];
+          }
+          atualizarCarrinho();
+          atualizarTotal();
+        };
+        controles.appendChild(menosBtn);
+
+        // Botão aumentar
+        const maisBtn = document.createElement("button");
+        maisBtn.textContent = "+";
+        maisBtn.className = "qtd";
+        maisBtn.onclick = function() {
+          carrinho[item].quantidade++;
+          atualizarCarrinho();
+          atualizarTotal();
+        };
+        controles.appendChild(maisBtn);
+
+        // Botão remover
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "X";
+        removeBtn.onclick = function() {
+          delete carrinho[item];
+          atualizarCarrinho();
+          atualizarTotal();
+        };
+        controles.appendChild(removeBtn);
+
+        li.appendChild(controles);
+        lista.appendChild(li);
+      }
     }
 
     // Adicionar itens ao carrinho
@@ -149,11 +209,13 @@
         const precoTexto = item.querySelector(".price").innerText;
         const preco = parseFloat(precoTexto.replace("R$","" ).replace(",","."));
 
-        const li = document.createElement("li");
-        li.textContent = `${nome} - ${precoTexto}`;
-        document.getElementById("lista-carrinho").appendChild(li);
+        if (carrinho[nome]) {
+          carrinho[nome].quantidade++;
+        } else {
+          carrinho[nome] = { quantidade: 1, preco: preco };
+        }
 
-        total += preco;
+        atualizarCarrinho();
         atualizarTotal();
       });
     });
