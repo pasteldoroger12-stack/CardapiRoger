@@ -31,6 +31,7 @@
     button:hover { background: #d98c00; }
     .carrinho ul { list-style: none; padding: 0; }
     .carrinho li { background: #fff; padding: 10px; margin: 5px 0; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .total { font-weight: bold; margin-top: 10px; font-size: 18px; }
     .dados-cliente input, .dados-cliente select { width: 100%; padding: 8px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 5px; }
     footer { text-align:center; background:#f4a300; color:white; padding:15px; margin-top:20px; }
     footer a { color:white; text-decoration:none; display: inline-flex; align-items: center; gap: 5px; }
@@ -83,6 +84,7 @@
   <section class="carrinho">
     <h2>🛒 Carrinho</h2>
     <ul id="lista-carrinho"></ul>
+    <p class="total">Total: R$ <span id="total">0,00</span></p>
     <button onclick="limparCarrinho()">Limpar Carrinho</button>
   </section>
 
@@ -92,7 +94,7 @@
     <input type="text" placeholder="Endereço" required>
 
     <label for="tipo">Tipo de pedido:</label>
-    <select id="tipo" name="tipo" onchange="mostrarTaxa()">
+    <select id="tipo" name="tipo" onchange="atualizarTotal()">
       <option value="retirada">Retirada</option>
       <option value="entrega">Entrega (+ R$ 5,00)</option>
     </select>
@@ -112,6 +114,8 @@
   </footer>
 
   <script>
+    let total = 0;
+
     function mostrarTaxa() {
       const tipo = document.getElementById("tipo").value;
       const taxa = document.getElementById("taxa-entrega");
@@ -122,9 +126,37 @@
       }
     }
 
+    function atualizarTotal() {
+      let valorTotal = total;
+      const tipo = document.getElementById("tipo").value;
+      if (tipo === "entrega") {
+        valorTotal += 5; // taxa de entrega
+      }
+      document.getElementById("total").innerText = valorTotal.toFixed(2).replace(".", ",");
+    }
+
     function limparCarrinho() {
       document.getElementById("lista-carrinho").innerHTML = "";
+      total = 0;
+      atualizarTotal();
     }
+
+    // Adicionar itens ao carrinho
+    document.querySelectorAll(".item button").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const item = this.parentElement;
+        const nome = item.querySelector("span:first-child").innerText;
+        const precoTexto = item.querySelector(".price").innerText;
+        const preco = parseFloat(precoTexto.replace("R$","" ).replace(",","."));
+
+        const li = document.createElement("li");
+        li.textContent = `${nome} - ${precoTexto}`;
+        document.getElementById("lista-carrinho").appendChild(li);
+
+        total += preco;
+        atualizarTotal();
+      });
+    });
   </script>
 </body>
 </html>
