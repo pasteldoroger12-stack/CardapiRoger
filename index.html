@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cardápio Digital - Pastel & Batata do Roger</title>
+  <title>Cardápio Digital - Pastel e Batata do Roger</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,7 +13,7 @@
     }
     header { text-align: center; background: #f4a300; padding: 20px; color: white; }
     header img { width: 200px; max-width: 80%; border-radius: 50%; display:block; margin: 0 auto 15px; }
-    h1 { margin: 10px 0; font-size: 26px; }
+    h1 { margin: 10px 0; font-size: 28px; font-weight: bold; text-align: center; }
     .menu, .carrinho, .dados-cliente { padding: 20px; background-color: rgba(255, 248, 231, 0.95); border-radius: 10px; margin: 10px; }
     .item { 
       background: #fff; 
@@ -44,8 +44,8 @@
 </head>
 <body>
   <header>
-    <img src="logo.jpg" alt="Logo Pastel & Batata do Roger">
-    <h1>Pastel & Batata do Roger</h1>
+    <img src="logo.jpg" alt="Logo Pastel e Batata do Roger">
+    <h1><strong>📦 Pedido Pastel e Batata do Roger</strong></h1>
   </header>
 
   <section class="menu">
@@ -95,6 +95,14 @@
     <select id="tipo" name="tipo" onchange="atualizarTotal()">
       <option value="retirada">Retirada</option>
       <option value="entrega">Entrega (+ R$ 3,00)</option>
+    </select>
+
+    <label for="pagamento">Forma de pagamento:</label>
+    <select id="pagamento" name="pagamento">
+      <option value="Dinheiro">Dinheiro</option>
+      <option value="Pix">Pix</option>
+      <option value="Cartão de Crédito">Cartão de Crédito</option>
+      <option value="Cartão de Débito">Cartão de Débito</option>
     </select>
 
     <p id="taxa-entrega" style="display:none; color:#d9534f;">
@@ -209,11 +217,13 @@
       const nome = document.querySelector('.dados-cliente input[placeholder="Nome"]').value;
       const endereco = document.querySelector('.dados-cliente input[placeholder="Endereço"]').value;
       const tipo = document.getElementById("tipo").value;
+      const pagamento = document.getElementById("pagamento").value;
 
-      let mensagem = `📦 *Pedido Pastel & Batata do Roger*%0A`;
+      let mensagem = `📦 *Pedido Pastel e Batata do Roger*%0A`;
       mensagem += `👤 Cliente: ${nome}%0A`;
       mensagem += `🏠 Endereço: ${endereco}%0A`;
-      mensagem += `📋 Tipo: ${tipo === "entrega" ? "Entrega" : "Retirada"}%0A%0A`;
+      mensagem += `📋 Tipo: ${tipo === "entrega" ? "Entrega" : "Retirada"}%0A`;
+      mensagem += `💳 Pagamento: ${pagamento}%0A%0A`;
 
       // Separar itens por categoria usando emojis
       let salgados = "";
