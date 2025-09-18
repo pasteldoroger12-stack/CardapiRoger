@@ -11,9 +11,9 @@
       margin: 0;
       padding: 0;
     }
-    header { text-align: center; background: #f4a300; padding: 15px; color: white; }
-    header img { width: 120px; border-radius: 50%; display:block; margin: 0 auto 10px; }
-    h1 { margin: 10px 0; }
+    header { text-align: center; background: #f4a300; padding: 20px; color: white; }
+    header img { width: 200px; max-width: 80%; border-radius: 50%; display:block; margin: 0 auto 15px; }
+    h1 { margin: 10px 0; font-size: 26px; }
     .menu, .carrinho, .dados-cliente { padding: 20px; background-color: rgba(255, 248, 231, 0.95); border-radius: 10px; margin: 10px; }
     .item { 
       background: #fff; 
@@ -44,7 +44,7 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Logo Pastel & Batata do Roger">
+    <img src="logo.jpg" alt="Logo Pastel & Batata do Roger">
     <h1>Pastel & Batata do Roger</h1>
   </header>
 
@@ -73,12 +73,6 @@
     <div class="item"><span>Prestígio</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
     <div class="item"><span>Sensação</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
 
-    <h2>🥤 Refrigerantes</h2>
-    <div class="item"><span>Lata (350ml)</span><span class="price">R$ 6,00</span><button>Adicionar</button></div>
-    <div class="item"><span>600ml</span><span class="price">R$ 8,00</span><button>Adicionar</button></div>
-    <div class="item"><span>1 Litro</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>2 Litros</span><span class="price">R$ 12,00</span><button>Adicionar</button></div>
-
     <h2>➕ Adicionais</h2>
     <div class="item"><span>Adicional de Recheio</span><span class="price">R$ 3,00</span><button>Adicionar</button></div>
     <div class="item"><span>Adicional de Catupiry Original</span><span class="price">R$ 5,00</span><button>Adicionar</button></div>
@@ -89,6 +83,7 @@
     <ul id="lista-carrinho"></ul>
     <p class="total">Total: R$ <span id="total">0,00</span></p>
     <button onclick="limparCarrinho()">Limpar Carrinho</button>
+    <button onclick="enviarWhatsApp()">Enviar Pedido pelo WhatsApp</button>
   </section>
 
   <section class="dados-cliente">
@@ -219,6 +214,27 @@
         atualizarTotal();
       });
     });
+
+    function enviarWhatsApp() {
+      const nome = document.querySelector('.dados-cliente input[placeholder="Nome"]').value;
+      const endereco = document.querySelector('.dados-cliente input[placeholder="Endereço"]').value;
+      const tipo = document.getElementById("tipo").value;
+
+      let mensagem = `📦 *Pedido Pastel & Batata do Roger*%0A`;
+      mensagem += `👤 Cliente: ${nome}%0A`;
+      mensagem += `🏠 Endereço: ${endereco}%0A`;
+      mensagem += `📋 Tipo: ${tipo === "entrega" ? "Entrega" : "Retirada"}%0A%0A`;
+
+      for (let item in carrinho) {
+        mensagem += `- ${item} (${carrinho[item].quantidade}x)%0A`;
+      }
+
+      mensagem += `%0A💰 Total: R$ ${document.getElementById("total").innerText}`;
+
+      const telefone = "5511983928497"; // número no formato internacional
+      const url = `https://wa.me/${telefone}?text=${mensagem}`;
+      window.open(url, "_blank");
+    }
   </script>
 </body>
 </html>
