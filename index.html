@@ -94,11 +94,11 @@
     <label for="tipo">Tipo de pedido:</label>
     <select id="tipo" name="tipo" onchange="atualizarTotal()">
       <option value="retirada">Retirada</option>
-      <option value="entrega">Entrega (+ R$ 5,00)</option>
+      <option value="entrega">Entrega (+ R$ 3,00)</option>
     </select>
 
     <p id="taxa-entrega" style="display:none; color:#d9534f;">
-      🚚 Taxa de entrega: R$ 5,00
+      🚚 Taxa de entrega: R$ 3,00
     </p>
   </section>
 
@@ -132,7 +132,7 @@
       }
       const tipo = document.getElementById("tipo").value;
       if (tipo === "entrega") {
-        valorTotal += 5; // taxa de entrega
+        valorTotal += 3; // taxa de entrega
       }
       document.getElementById("total").innerText = valorTotal.toFixed(2).replace(".", ",");
     }
