@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio Digital</title>
+<title>Pastel e Batata do Roger</title>
 
 <style>
 body {
@@ -14,7 +14,7 @@ body {
 
 header {
   background: #f4a300;
-  color: #fff;
+  color: white;
   text-align: center;
   padding: 20px;
 }
@@ -22,9 +22,6 @@ header {
 .menu {
   display: none;
   padding: 20px;
-  margin: 10px;
-  background: #fff;
-  border-radius: 10px;
 }
 
 .menu.ativo {
@@ -34,11 +31,14 @@ header {
 .item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin: 8px 0;
   background: #f3f3f3;
+  padding: 10px;
+  margin: 6px 0;
   border-radius: 8px;
+}
+
+.price {
+  font-weight: bold;
 }
 
 button {
@@ -46,19 +46,12 @@ button {
   color: white;
   border: none;
   padding: 6px 10px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
 button:hover {
   background: #d98c00;
-}
-
-.carrinho {
-  padding: 20px;
-  margin: 10px;
-  background: #fff;
-  border-radius: 10px;
 }
 </style>
 </head>
@@ -66,71 +59,95 @@ button:hover {
 <body>
 
 <header>
-  <h1>📦 Pedido Pastel e Batata do Roger</h1>
+  <h1>🍔 Pastel e Batata do Roger</h1>
 </header>
 
-<!-- ESCOLHA -->
+<!-- CATEGORIAS -->
 <section id="categorias" class="menu ativo">
-  <h2>🍽️ Escolha uma categoria</h2>
-
-  <div class="item">
-    <span>🥟 Pastéis</span>
-    <button onclick="abrir('pasteis')">Ver</button>
-  </div>
-
-  <div class="item">
-    <span>🍔 Combos</span>
-    <button onclick="abrir('combos')">Ver</button>
-  </div>
-
-  <div class="item">
-    <span>🍕 Pizzinha</span>
-    <button onclick="abrir('pizzinha')">Ver</button>
-  </div>
+  <h2>O que você deseja ver?</h2>
+  <div class="item"><span>🥟 Pastéis</span><button onclick="abrir('pasteis')">Ver</button></div>
+  <div class="item"><span>🍔 Combos</span><button onclick="abrir('combos')">Ver</button></div>
+  <div class="item"><span>🍕 Pizzinha</span><button onclick="abrir('pizzinha')">Ver</button></div>
 </section>
 
-<!-- PASTÉIS -->
+<!-- ================= PASTÉIS ================= -->
 <section id="pasteis" class="menu">
-  <button onclick="voltar()">⬅ Voltar</button>
-  <h2>🥟 Pastéis</h2>
+<button onclick="voltar()">⬅ Voltar</button>
 
-  <div class="item"><span>Carne</span><button>Adicionar</button></div>
-  <div class="item"><span>Carne com Queijo</span><button>Adicionar</button></div>
-  <div class="item"><span>Frango</span><button>Adicionar</button></div>
+<h2>🥟 Pastéis Salgados</h2>
+<div class="item"><span>Carne</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Carne com Queijo</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Carne com Cheddar</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Carne com Catupiry</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Carne com Cheddar e Catupiry</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Bauru</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Queijo</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Calabresa com Queijo</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Calabresa com Cheddar</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Calabresa com Catupiry</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Dois Queijos</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Três Queijos</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Frango com Queijo</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Frango com Catupiry Original</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Frango com Cheddar</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Frango com Cheddar e Catupiry</span><span class="price">R$ 15,00</span></div>
+<div class="item"><span>Frango com Queijo e Catupiry</span><span class="price">R$ 15,00</span></div>
+
+<h2>🍫 Pastéis Doces</h2>
+<div class="item"><span>Brigadeiro</span><span class="price">R$ 15,00</span></div>
+<div class="item"><span>Prestígio</span><span class="price">R$ 15,00</span></div>
+<div class="item"><span>Sensação</span><span class="price">R$ 15,00</span></div>
+
+<h2>➕ Adicionais</h2>
+<div class="item"><span>Adicional de Recheio</span><span class="price">R$ 3,00</span></div>
+<div class="item"><span>Adicional de Catupiry Original</span><span class="price">R$ 5,00</span></div>
 </section>
 
-<!-- COMBOS -->
+<!-- ================= COMBOS ================= -->
 <section id="combos" class="menu">
-  <button onclick="voltar()">⬅ Voltar</button>
-  <h2>🍔 Combos</h2>
+<button onclick="voltar()">⬅ Voltar</button>
 
-  <div class="item"><span>X-Bacon</span><button>Adicionar</button></div>
-  <div class="item"><span>X-Salada</span><button>Adicionar</button></div>
+<h2>🍔 Combo Individual</h2>
+<div class="item"><span>X-Burguer + Batata P + Refri</span><span class="price">R$ 32,00</span></div>
+<div class="item"><span>X-Salada + Batata P + Refri</span><span class="price">R$ 33,00</span></div>
+<div class="item"><span>X-Bacon + Batata P + Refri</span><span class="price">R$ 35,00</span></div>
+
+<h2>👩‍❤️‍👨 Combo Casal</h2>
+<div class="item"><span>2 X-Burguer + Batata M + Refri 2L</span><span class="price">R$ 65,00</span></div>
+<div class="item"><span>2 X-Salada + Batata M + Refri 2L</span><span class="price">R$ 80,00</span></div>
+<div class="item"><span>2 X-Bacon + Batata M + Refri 2L</span><span class="price">R$ 71,50</span></div>
+
+<h2>👫 Para dividir com os amigos</h2>
+<div class="item"><span>3 X-Burguer + Batata G + Refri 2L</span><span class="price">R$ 95,00</span></div>
+<div class="item"><span>3 X-Salada + Batata G + Refri 2L</span><span class="price">R$ 105,00</span></div>
+
+<h2>👥 Para dividir com a galera</h2>
+<div class="item"><span>4 X-Burguer + Batata G + Refri 2L</span><span class="price">R$ 120,00</span></div>
+<div class="item"><span>4 X-Salada + Batata G + Refri 2L</span><span class="price">R$ 135,00</span></div>
+<div class="item"><span>4 X-Bacon + Batata G + Refri 2L</span><span class="price">R$ 145,00</span></div>
 </section>
 
-<!-- PIZZINHA -->
+<!-- ================= PIZZINHA ================= -->
 <section id="pizzinha" class="menu">
-  <button onclick="voltar()">⬅ Voltar</button>
-  <h2>🍕 Pizzinha</h2>
+<button onclick="voltar()">⬅ Voltar</button>
 
-  <div class="item"><span>Mussarela</span><button>Adicionar</button></div>
-  <div class="item"><span>Calabresa</span><button>Adicionar</button></div>
+<div class="item"><span>Mussarela</span><span class="price">R$ 7,99</span></div>
+<div class="item"><span>Calabresa com Queijo</span><span class="price">R$ 10,00</span></div>
+<div class="item"><span>Frango com Catupiry</span><span class="price">R$ 15,00</span></div>
+<div class="item"><span>Bauru</span><span class="price">R$ 13,00</span></div>
+<div class="item"><span>Pepperoni</span><span class="price">R$ 17,00</span></div>
+<div class="item"><span>Três Queijos</span><span class="price">R$ 16,00</span></div>
+<div class="item"><span>Palmito com Queijo</span><span class="price">R$ 17,00</span></div>
 </section>
 
 <script>
 function abrir(id) {
-  document.querySelectorAll(".menu").forEach(sec => {
-    sec.classList.remove("ativo");
-  });
-
+  document.querySelectorAll(".menu").forEach(m => m.classList.remove("ativo"));
   document.getElementById(id).classList.add("ativo");
 }
 
 function voltar() {
-  document.querySelectorAll(".menu").forEach(sec => {
-    sec.classList.remove("ativo");
-  });
-
+  document.querySelectorAll(".menu").forEach(m => m.classList.remove("ativo"));
   document.getElementById("categorias").classList.add("ativo");
 }
 </script>
