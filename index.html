@@ -14,16 +14,21 @@ body {
 
 header {
   background: #f4a300;
-  color: white;
+  color: #fff;
   text-align: center;
   padding: 20px;
 }
 
 .menu {
+  display: none;
   padding: 20px;
   margin: 10px;
   background: #fff;
   border-radius: 10px;
+}
+
+.menu.ativo {
+  display: block;
 }
 
 .item {
@@ -32,13 +37,8 @@ header {
   align-items: center;
   padding: 10px;
   margin: 8px 0;
-  background: #f9f9f9;
+  background: #f3f3f3;
   border-radius: 8px;
-}
-
-.price {
-  font-weight: bold;
-  margin-right: 10px;
 }
 
 button {
@@ -60,16 +60,6 @@ button:hover {
   background: #fff;
   border-radius: 10px;
 }
-
-.carrinho ul {
-  list-style: none;
-  padding: 0;
-}
-
-.total {
-  font-weight: bold;
-  font-size: 18px;
-}
 </style>
 </head>
 
@@ -80,102 +70,68 @@ button:hover {
 </header>
 
 <!-- ESCOLHA -->
-<section id="categorias" class="menu">
+<section id="categorias" class="menu ativo">
   <h2>🍽️ Escolha uma categoria</h2>
-  <div class="item"><span>🥟 Pastéis</span><button onclick="abrirCategoria('pasteis')">Ver</button></div>
-  <div class="item"><span>🍔 Combos</span><button onclick="abrirCategoria('combos')">Ver</button></div>
-  <div class="item"><span>🍕 Pizzinha</span><button onclick="abrirCategoria('pizzinha')">Ver</button></div>
+
+  <div class="item">
+    <span>🥟 Pastéis</span>
+    <button onclick="abrir('pasteis')">Ver</button>
+  </div>
+
+  <div class="item">
+    <span>🍔 Combos</span>
+    <button onclick="abrir('combos')">Ver</button>
+  </div>
+
+  <div class="item">
+    <span>🍕 Pizzinha</span>
+    <button onclick="abrir('pizzinha')">Ver</button>
+  </div>
 </section>
 
 <!-- PASTÉIS -->
-<section id="pasteis" class="menu" style="display:none;">
-<button onclick="voltar()">⬅ Voltar</button>
-<h2>🥟 Pastéis</h2>
-<div class="item"><span>Carne</span><span class="price">R$ 10,00</span><button class="add">Adicionar</button></div>
-<div class="item"><span>Carne c/ Queijo</span><span class="price">R$ 12,00</span><button class="add">Adicionar</button></div>
-<div class="item"><span>Carne c/ Catupiry</span><span class="price">R$ 13,00</span><button class="add">Adicionar</button></div>
+<section id="pasteis" class="menu">
+  <button onclick="voltar()">⬅ Voltar</button>
+  <h2>🥟 Pastéis</h2>
+
+  <div class="item"><span>Carne</span><button>Adicionar</button></div>
+  <div class="item"><span>Carne com Queijo</span><button>Adicionar</button></div>
+  <div class="item"><span>Frango</span><button>Adicionar</button></div>
 </section>
 
 <!-- COMBOS -->
-<section id="combos" class="menu" style="display:none;">
-<button onclick="voltar()">⬅ Voltar</button>
-<h2>🍔 Combos</h2>
-<div class="item"><span>X-Bacon</span><span class="price">R$ 35,00</span><button class="add">Adicionar</button></div>
-<div class="item"><span>X-Salada</span><span class="price">R$ 33,00</span><button class="add">Adicionar</button></div>
+<section id="combos" class="menu">
+  <button onclick="voltar()">⬅ Voltar</button>
+  <h2>🍔 Combos</h2>
+
+  <div class="item"><span>X-Bacon</span><button>Adicionar</button></div>
+  <div class="item"><span>X-Salada</span><button>Adicionar</button></div>
 </section>
 
 <!-- PIZZINHA -->
-<section id="pizzinha" class="menu" style="display:none;">
-<button onclick="voltar()">⬅ Voltar</button>
-<h2>🍕 Pizzinha</h2>
-<div class="item"><span>Mussarela</span><span class="price">R$ 7,99</span><button class="add">Adicionar</button></div>
-<div class="item"><span>Calabresa com Queijo</span><span class="price">R$ 10,00</span><button class="add">Adicionar</button></div>
-</section>
+<section id="pizzinha" class="menu">
+  <button onclick="voltar()">⬅ Voltar</button>
+  <h2>🍕 Pizzinha</h2>
 
-<!-- CARRINHO -->
-<section class="carrinho">
-<h2>🛒 Carrinho</h2>
-<ul id="lista"></ul>
-<p class="total">Total: R$ <span id="total">0,00</span></p>
-<button onclick="enviarWhats()">Enviar WhatsApp</button>
+  <div class="item"><span>Mussarela</span><button>Adicionar</button></div>
+  <div class="item"><span>Calabresa</span><button>Adicionar</button></div>
 </section>
 
 <script>
-let carrinho = [];
+function abrir(id) {
+  document.querySelectorAll(".menu").forEach(sec => {
+    sec.classList.remove("ativo");
+  });
 
-function abrirCategoria(id) {
-  document.getElementById("categorias").style.display = "none";
-  document.getElementById("pasteis").style.display = "none";
-  document.getElementById("combos").style.display = "none";
-  document.getElementById("pizzinha").style.display = "none";
-  document.getElementById(id).style.display = "block";
+  document.getElementById(id).classList.add("ativo");
 }
 
 function voltar() {
-  document.getElementById("pasteis").style.display = "none";
-  document.getElementById("combos").style.display = "none";
-  document.getElementById("pizzinha").style.display = "none";
-  document.getElementById("categorias").style.display = "block";
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".add").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const item = btn.parentElement;
-      const nome = item.children[0].innerText;
-      const preco = parseFloat(item.children[1].innerText.replace("R$","").replace(",","."));
-      carrinho.push({ nome, preco });
-      atualizarCarrinho();
-    });
-  });
-});
-
-function atualizarCarrinho() {
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
-  let total = 0;
-
-  carrinho.forEach(i => {
-    total += i.preco;
-    const li = document.createElement("li");
-    li.innerText = `${i.nome} - R$ ${i.preco.toFixed(2).replace(".",",")}`;
-    lista.appendChild(li);
+  document.querySelectorAll(".menu").forEach(sec => {
+    sec.classList.remove("ativo");
   });
 
-  document.getElementById("total").innerText = total.toFixed(2).replace(".",",");
-}
-
-function enviarWhats() {
-  if (carrinho.length === 0) {
-    alert("Carrinho vazio!");
-    return;
-  }
-
-  let msg = "📦 Pedido:%0A";
-  carrinho.forEach(i => msg += `- ${i.nome}%0A`);
-  msg += `%0ATotal: R$ ${document.getElementById("total").innerText}`;
-
-  window.open("https://wa.me/5511983928497?text=" + msg, "_blank");
+  document.getElementById("categorias").classList.add("ativo");
 }
 </script>
 
