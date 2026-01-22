@@ -3,44 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio</title>
+<title>Cardápio Digital</title>
 
 <style>
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background: #111;
+  background: #000;
   color: #fff;
 }
 
-/* Tela categorias */
+/* TELA CATEGORIAS */
 .categorias {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 40px 20px;
-}
-
-.categorias h1 {
-  margin-bottom: 20px;
 }
 
 .categorias button {
-  width: 100%;
+  width: 90%;
   max-width: 320px;
-  padding: 15px;
+  padding: 16px;
   margin: 10px 0;
   font-size: 18px;
   background: #ff8c00;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
 }
 
-/* Cardápios */
+/* MENU COM IMAGEM */
 .menu {
   display: none;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
   padding: 20px;
 }
 
@@ -48,19 +48,27 @@ body {
   display: block;
 }
 
+/* FUNDO ESCURO PARA LEITURA */
+.overlay {
+  background: rgba(0,0,0,0.75);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* BOTÃO VOLTAR */
 .voltar {
   background: #ff8c00;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 14px;
   border-radius: 6px;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
   margin-bottom: 20px;
 }
 
-/* Itens */
+/* ITENS */
 .item {
-  background: #1e1e1e;
+  background: rgba(30,30,30,0.9);
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 15px;
@@ -72,104 +80,91 @@ body {
 }
 
 .item p {
-  margin: 5px 0;
+  margin: 6px 0;
   font-size: 14px;
-  color: #ccc;
+  color: #ddd;
 }
 
 .preco {
   font-size: 18px;
   font-weight: bold;
-  margin-top: 8px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TELA DE CATEGORIAS -->
+<!-- CATEGORIAS -->
 <section class="categorias" id="categorias">
   <h1>Escolha uma categoria</h1>
   <button onclick="abrirMenu('burgers')">🍔 Burgers</button>
 </section>
 
 <!-- BURGERS -->
-<section class="menu" id="burgers">
-  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
+<section class="menu" id="burgers" style="background-image:url('img/burgers.jpg')">
+  <div class="overlay">
 
-  <h2>BURGERS TRADICIONAIS</h2>
+    <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
-  <div class="item">
-    <h3>X-BURGUER</h3>
-    <p>Hambúrguer, mussarela e molho especial</p>
-    <div class="preco">R$ 16</div>
+    <h2>BURGERS TRADICIONAIS</h2>
+
+    <div class="item">
+      <h3>X-BURGUER</h3>
+      <p>Hambúrguer, mussarela e molho especial</p>
+      <div class="preco">R$ 16</div>
+    </div>
+
+    <div class="item">
+      <h3>X-BACON</h3>
+      <p>Hambúrguer, mussarela, bacon e molho especial</p>
+      <div class="preco">R$ 19</div>
+    </div>
+
+    <div class="item">
+      <h3>X-SALADA</h3>
+      <p>Hambúrguer, mussarela, alface, tomate, cebola e molho especial</p>
+      <div class="preco">R$ 17</div>
+    </div>
+
+    <div class="item">
+      <h3>BIG TASTY</h3>
+      <p>Hambúrguer, mussarela, alface, tomate, cebola e molho tasty</p>
+      <div class="preco">R$ 23</div>
+    </div>
+
+    <div class="item">
+      <h3>CHEDDAR</h3>
+      <p>Hambúrguer, queijo cheddar e cebola caramelizada</p>
+      <div class="preco">R$ 21</div>
+    </div>
+
+    <h2>BURGERS GOURMET (180g)</h2>
+
+    <div class="item">
+      <h3>CLASSIC BURGUER</h3>
+      <p>Hambúrguer, cheddar, catupiry, alface, tomate, cebola roxa e maionese da casa</p>
+      <div class="preco">R$ 35</div>
+    </div>
+
+    <div class="item">
+      <h3>BACON BURGUER</h3>
+      <p>Bacon crocante, cheddar cremoso, molho barbecue, tomate e cebola roxa</p>
+      <div class="preco">R$ 45</div>
+    </div>
+
+    <div class="item">
+      <h3>TURBO CHEDDAR</h3>
+      <p>Dois hambúrgueres, cheddar, mussarela, pepperoni, cebola caramelizada e barbecue</p>
+      <div class="preco">R$ 51</div>
+    </div>
+
+    <div class="item">
+      <h3>MEGA TRIPLO TASTY</h3>
+      <p>Três hambúrgueres, cheddar, muito bacon, alface, tomate, cebola roxa e molho tasty</p>
+      <div class="preco">R$ 63</div>
+    </div>
+
   </div>
-
-  <div class="item">
-    <h3>X-BACON</h3>
-    <p>Hambúrguer, mussarela, bacon e molho especial</p>
-    <div class="preco">R$ 19</div>
-  </div>
-
-  <div class="item">
-    <h3>X-SALADA</h3>
-    <p>Hambúrguer, mussarela, alface, tomate, cebola e molho especial</p>
-    <div class="preco">R$ 17</div>
-  </div>
-
-  <div class="item">
-    <h3>BIG TASTY</h3>
-    <p>Hambúrguer, mussarela, alface, tomate, cebola e molho tasty</p>
-    <div class="preco">R$ 23</div>
-  </div>
-
-  <div class="item">
-    <h3>CHEDDAR</h3>
-    <p>Hambúrguer, queijo cheddar e cebola caramelizada</p>
-    <div class="preco">R$ 21</div>
-  </div>
-
-  <h2>BURGERS GOURMET <small>(Hambúrguer de carne 180g)</small></h2>
-
-  <div class="item">
-    <h3>CLASSIC BURGUER</h3>
-    <p>Hambúrguer, queijo cheddar, catupiry, alface, tomate, cebola roxa e maionese da casa</p>
-    <div class="preco">R$ 35</div>
-  </div>
-
-  <div class="item">
-    <h3>BACON BURGUER</h3>
-    <p>Hambúrguer, bacon crocante, cheddar cremoso, molho barbecue, tomate e cebola roxa</p>
-    <div class="preco">R$ 45</div>
-  </div>
-
-  <div class="item">
-    <h3>TURBO CHEDDAR</h3>
-    <p>Dois hambúrgueres, queijo cheddar, mussarela, pepperone, molho cheddar, cebola caramelizada, tomate e barbecue</p>
-    <div class="preco">R$ 51</div>
-  </div>
-
-  <div class="item">
-    <h3>MEGA TRIPLO TASTY</h3>
-    <p>Três hambúrgueres, queijo cheddar, muito bacon, alface, tomate, cebola roxa e molho tasty</p>
-    <div class="preco">R$ 63</div>
-  </div>
-
-  <h2>ACOMPANHAMENTOS</h2>
-
-  <div class="item"><h3>Batata P</h3><div class="preco">R$ 10</div></div>
-  <div class="item"><h3>Batata M</h3><div class="preco">R$ 20</div></div>
-  <div class="item"><h3>Batata G</h3><div class="preco">R$ 25</div></div>
-  <div class="item"><h3>Batata M (cheddar e bacon)</h3><div class="preco">R$ 32</div></div>
-  <div class="item"><h3>Batata G (cheddar e bacon)</h3><div class="preco">R$ 38</div></div>
-
-  <h2>ADICIONAIS</h2>
-
-  <div class="item"><h3>Hambúrguer de carne 180g</h3><div class="preco">R$ 10</div></div>
-  <div class="item"><h3>Queijo cheddar ou mussarela</h3></div>
-  <div class="item"><h3>Cheddar ou catupiry</h3></div>
-  <div class="item"><h3>Pepperoni</h3></div>
-  <div class="item"><h3>Maionese da casa</h3></div>
 </section>
 
 <script>
