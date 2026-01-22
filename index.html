@@ -1,260 +1,194 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cardápio Digital - Pastel e Batata do Roger</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fff8e7;
-      margin: 0;
-      padding: 0;
-    }
-    header { text-align: center; background: #f4a300; padding: 20px; color: white; }
-    header img { width: 200px; max-width: 80%; border-radius: 50%; display:block; margin: 0 auto 15px; }
-    h1 { margin: 10px 0; font-size: 28px; font-weight: bold; text-align: center; }
-    .menu, .carrinho, .dados-cliente { padding: 20px; background-color: rgba(255, 248, 231, 0.95); border-radius: 10px; margin: 10px; }
-    .item { 
-      background: #fff; 
-      margin: 10px 0; 
-      padding: 10px; 
-      border-radius: 10px; 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center;
-    }
-    .item span:first-child { flex: 1; }
-    .item span.price { width: 80px; text-align: right; font-weight: bold; margin-right: 15px; }
-    button { background: #f4a300; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #d98c00; }
-    .carrinho ul { list-style: none; padding: 0; }
-    .carrinho li { background: #fff; padding: 10px; margin: 5px 0; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-    .carrinho .controles { display: flex; gap: 5px; align-items: center; }
-    .carrinho li button { background: #d9534f; }
-    .carrinho li button.qtd { background: #f4a300; }
-    .total { font-weight: bold; margin-top: 10px; font-size: 18px; }
-    .dados-cliente input, .dados-cliente select { width: 100%; padding: 8px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 5px; }
-    footer { text-align:center; background:#f4a300; color:white; padding:15px; margin-top:20px; }
-    footer a { color:white; text-decoration:none; display: inline-flex; align-items: center; gap: 5px; }
-    footer a:hover { text-decoration: underline; }
-    .icon { width: 18px; height: 18px; vertical-align: middle; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardápio Digital - Pastel e Batata do Roger</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #fff8e7;
+  margin: 0;
+}
+header {
+  background: #f4a300;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+h1 { margin: 10px 0; }
+
+.menu {
+  padding: 20px;
+  margin: 10px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 8px 0;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.price {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+button {
+  background: #f4a300;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover { background: #d98c00; }
+
+.carrinho {
+  padding: 20px;
+  margin: 10px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.carrinho ul {
+  list-style: none;
+  padding: 0;
+}
+
+.carrinho li {
+  background: #f1f1f1;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controles button {
+  background: #d9534f;
+  margin-left: 5px;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <img src="logo.jpg" alt="Logo Pastel e Batata do Roger">
-    <h1><strong>📦 Pedido Pastel e Batata do Roger</strong></h1>
-  </header>
 
-  <section class="menu">
-    <h2>🥟 Pastéis Salgados</h2>
-    <div class="item"><span>Carne</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Carne c/ Queijo</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Carne c/ Cheddar</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Carne c/ Catupiry</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Carne c/ Cheddar e Catupiry</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Bauru</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Queijo</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Calabresa c/ Queijo</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Calabresa c/ Cheddar</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Calabresa c/ Catupiry</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Dois Queijos</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Três Queijos</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Frango c/ Queijo</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Frango c/ Catupiry Original</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Frango c/ Cheddar</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Frango c/ Cheddar e Catupiry</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Frango c/ Queijo e Catupiry</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
+<header>
+  <h1>📦 Pedido Pastel e Batata do Roger</h1>
+</header>
 
-    <h2>🍫 Pastéis Doces</h2>
-    <div class="item"><span>Brigadeiro</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Prestígio</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Sensação</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
+<!-- CATEGORIAS -->
+<section id="categorias" class="menu">
+  <h2>🍽️ O que você deseja pedir?</h2>
+  <div class="item"><span>🥟 Pastéis</span><button onclick="abrirCategoria('pasteis')">Ver</button></div>
+  <div class="item"><span>🍔 Combos</span><button onclick="abrirCategoria('combos')">Ver</button></div>
+  <div class="item"><span>🍕 Pizzinha</span><button onclick="abrirCategoria('pizzinha')">Ver</button></div>
+</section>
 
-    <h2>➕ Adicionais</h2>
-    <div class="item"><span>Adicional de Recheio</span><span class="price">R$ 3,00</span><button>Adicionar</button></div>
-    <div class="item"><span>Adicional de Catupiry Original</span><span class="price">R$ 5,00</span><button>Adicionar</button></div>
-  </section>
+<!-- PASTÉIS -->
+<section id="pasteis" class="menu" style="display:none;">
+<button onclick="voltar()">⬅ Voltar</button>
 
-  <section class="carrinho">
-    <h2>🛒 Carrinho</h2>
-    <ul id="lista-carrinho"></ul>
-    <p class="total">Total: R$ <span id="total">0,00</span></p>
-    <button onclick="limparCarrinho()">Limpar Carrinho</button>
-    <button onclick="enviarWhatsApp()">Enviar Pedido pelo WhatsApp</button>
-  </section>
+<h2>🥟 Pastel Salgado</h2>
+<div class="item"><span>Carne</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
+<div class="item"><span>Carne c/ Queijo</span><span class="price">R$ 12,00</span><button>Adicionar</button></div>
+<div class="item"><span>Carne c/ Catupiry</span><span class="price">R$ 13,00</span><button>Adicionar</button></div>
 
-  <section class="dados-cliente">
-    <h2>📋 Dados do Cliente</h2>
-    <input type="text" placeholder="Nome" required>
-    <input type="text" placeholder="Endereço" required>
+<h2>🍫 Pastel Doce</h2>
+<div class="item"><span>Brigadeiro</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
+<div class="item"><span>Prestígio</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
 
-    <label for="tipo">Tipo de pedido:</label>
-    <select id="tipo" name="tipo" onchange="atualizarTotal()">
-      <option value="retirada">Retirada</option>
-      <option value="entrega">Entrega (+ R$ 3,00)</option>
-    </select>
+<h2>➕ Adicionais</h2>
+<div class="item"><span>Adicional de Recheio</span><span class="price">R$ 5,00</span><button>Adicionar</button></div>
+</section>
 
-    <label for="pagamento">Forma de pagamento:</label>
-    <select id="pagamento" name="pagamento">
-      <option value="Dinheiro">Dinheiro</option>
-      <option value="Pix">Pix</option>
-      <option value="Cartão de Crédito">Cartão de Crédito</option>
-      <option value="Cartão de Débito">Cartão de Débito</option>
-    </select>
+<!-- COMBOS -->
+<section id="combos" class="menu" style="display:none;">
+<button onclick="voltar()">⬅ Voltar</button>
 
-    <p id="taxa-entrega" style="display:none; color:#d9534f;">
-      🚚 Taxa de entrega: R$ 3,00
-    </p>
-  </section>
+<h2>🍔 Combo Individual</h2>
+<div class="item"><span>X-Bacon</span><span class="price">R$ 35,00</span><button>Adicionar</button></div>
+<div class="item"><span>X-Salada</span><span class="price">R$ 33,00</span><button>Adicionar</button></div>
+<div class="item"><span>X-Burguer</span><span class="price">R$ 32,00</span><button>Adicionar</button></div>
+</section>
 
-  <footer>
-    <p>📞 (11) 98392-8497</p>
-    <p>
-      <a href="https://www.instagram.com/pastel_e_batata_roger" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" class="icon"> @pastel_e_batata_roger
-      </a>
-    </p>
-  </footer>
+<!-- PIZZINHA -->
+<section id="pizzinha" class="menu" style="display:none;">
+<button onclick="voltar()">⬅ Voltar</button>
 
-  <script>
-    let carrinho = {};
+<div class="item"><span>Mussarela</span><span class="price">R$ 7,99</span><button>Adicionar</button></div>
+<div class="item"><span>Calabresa com Queijo</span><span class="price">R$ 10,00</span><button>Adicionar</button></div>
+<div class="item"><span>Frango com Catupiry</span><span class="price">R$ 15,00</span><button>Adicionar</button></div>
+</section>
 
-    function atualizarTotal() {
-      let valorTotal = 0;
-      for (let item in carrinho) {
-        valorTotal += carrinho[item].quantidade * carrinho[item].preco;
-      }
-      const tipo = document.getElementById("tipo").value;
-      if (tipo === "entrega") {
-        valorTotal += 3; // taxa de entrega
-      }
-      document.getElementById("total").innerText = valorTotal.toFixed(2).replace(".", ",");
-    }
+<!-- CARRINHO -->
+<section class="carrinho">
+<h2>🛒 Carrinho</h2>
+<ul id="lista"></ul>
+<p class="total">Total: R$ <span id="total">0,00</span></p>
+<button onclick="enviarWhats()">Enviar no WhatsApp</button>
+</section>
 
-    function limparCarrinho() {
-      document.getElementById("lista-carrinho").innerHTML = "";
-      carrinho = {};
-      atualizarTotal();
-    }
+<script>
+let carrinho = {};
 
-    function atualizarCarrinho() {
-      const lista = document.getElementById("lista-carrinho");
-      lista.innerHTML = "";
-      for (let item in carrinho) {
-        const li = document.createElement("li");
-        const qtd = carrinho[item].quantidade;
-        const precoTotal = carrinho[item].quantidade * carrinho[item].preco;
-        li.textContent = `${item} - ${qtd}x R$ ${precoTotal.toFixed(2).replace(".", ",")}`;
+document.querySelectorAll(".item button").forEach(btn => {
+  btn.onclick = function() {
+    if (this.innerText !== "Adicionar") return;
+    const item = this.parentElement;
+    const nome = item.children[0].innerText;
+    const preco = parseFloat(item.children[1].innerText.replace("R$","").replace(",","."));
+    carrinho[nome] = (carrinho[nome] || 0) + preco;
+    atualizar();
+  }
+});
 
-        const controles = document.createElement("div");
-        controles.className = "controles";
+function atualizar() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+  let total = 0;
+  for (let i in carrinho) {
+    total += carrinho[i];
+    const li = document.createElement("li");
+    li.innerText = i + " - R$ " + carrinho[i].toFixed(2).replace(".",",");
+    lista.appendChild(li);
+  }
+  document.getElementById("total").innerText = total.toFixed(2).replace(".",",");
+}
 
-        const menosBtn = document.createElement("button");
-        menosBtn.textContent = "-";
-        menosBtn.className = "qtd";
-        menosBtn.onclick = function() {
-          if (carrinho[item].quantidade > 1) {
-            carrinho[item].quantidade--;
-          } else {
-            delete carrinho[item];
-          }
-          atualizarCarrinho();
-          atualizarTotal();
-        };
-        controles.appendChild(menosBtn);
+function abrirCategoria(id) {
+  document.getElementById("categorias").style.display = "none";
+  ["pasteis","combos","pizzinha"].forEach(c => document.getElementById(c).style.display="none");
+  document.getElementById(id).style.display = "block";
+}
 
-        const maisBtn = document.createElement("button");
-        maisBtn.textContent = "+";
-        maisBtn.className = "qtd";
-        maisBtn.onclick = function() {
-          carrinho[item].quantidade++;
-          atualizarCarrinho();
-          atualizarTotal();
-        };
-        controles.appendChild(maisBtn);
+function voltar() {
+  ["pasteis","combos","pizzinha"].forEach(c => document.getElementById(c).style.display="none");
+  document.getElementById("categorias").style.display = "block";
+}
 
-        const removeBtn = document.createElement("button");
-        removeBtn.textContent = "X";
-        removeBtn.onclick = function() {
-          delete carrinho[item];
-          atualizarCarrinho();
-          atualizarTotal();
-        };
-        controles.appendChild(removeBtn);
+function enviarWhats() {
+  let msg = "📦 Pedido:%0A";
+  for (let i in carrinho) msg += `- ${i}%0A`;
+  msg += `%0ATotal: R$ ${document.getElementById("total").innerText}`;
+  window.open("https://wa.me/5511983928497?text="+msg);
+}
+</script>
 
-        li.appendChild(controles);
-        lista.appendChild(li);
-      }
-    }
-
-    document.querySelectorAll(".item button").forEach(btn => {
-      btn.addEventListener("click", function() {
-        const item = this.parentElement;
-        const nome = item.querySelector("span:first-child").innerText;
-        const precoTexto = item.querySelector(".price").innerText;
-        const preco = parseFloat(precoTexto.replace("R$","" ).replace(",","."));
-
-        if (carrinho[nome]) {
-          carrinho[nome].quantidade++;
-        } else {
-          carrinho[nome] = { quantidade: 1, preco: preco };
-        }
-
-        atualizarCarrinho();
-        atualizarTotal();
-      });
-    });
-
-    function enviarWhatsApp() {
-      if (Object.keys(carrinho).length === 0) {
-        alert("⚠️ Adicione itens ao carrinho antes de finalizar o pedido!");
-        return;
-      }
-
-      const nome = document.querySelector('.dados-cliente input[placeholder="Nome"]').value;
-      const endereco = document.querySelector('.dados-cliente input[placeholder="Endereço"]').value;
-      const tipo = document.getElementById("tipo").value;
-      const pagamento = document.getElementById("pagamento").value;
-
-      let mensagem = `📦 *Pedido Pastel e Batata do Roger*%0A`;
-      mensagem += `👤 Cliente: ${nome}%0A`;
-      mensagem += `🏠 Endereço: ${endereco}%0A`;
-      mensagem += `📋 Tipo: ${tipo === "entrega" ? "Entrega" : "Retirada"}%0A`;
-      mensagem += `💳 Pagamento: ${pagamento}%0A%0A`;
-
-      // Separar itens por categoria usando emojis
-      let salgados = "";
-      let doces = "";
-      let adicionais = "";
-
-      for (let item in carrinho) {
-        if (item.toLowerCase().includes("frango") || item.toLowerCase().includes("carne") || item.toLowerCase().includes("calabresa") || item.toLowerCase().includes("queijo") || item.toLowerCase().includes("bauru")) {
-          salgados += `- ${item} (${carrinho[item].quantidade}x)%0A`;
-        } else if (item.toLowerCase().includes("brigadeiro") || item.toLowerCase().includes("prest") || item.toLowerCase().includes("sens")) {
-          doces += `- ${item} (${carrinho[item].quantidade}x)%0A`;
-        } else {
-          adicionais += `- ${item} (${carrinho[item].quantidade}x)%0A`;
-        }
-      }
-
-      if (salgados) mensagem += `🥟 *Salgados:*%0A${salgados}%0A`;
-      if (doces) mensagem += `🍫 *Doces:*%0A${doces}%0A`;
-      if (adicionais) mensagem += `➕ *Adicionais:*%0A${adicionais}%0A`;
-
-      if (tipo === "entrega") {
-        mensagem += `🚚 Taxa de Entrega: R$ 3,00%0A`;
-      }
-
-      mensagem += `💰 Total: R$ ${document.getElementById("total").innerText}%0A%0A`;
-      mensagem += `🙏 Obrigado pela preferência!`;
-
-      const telefone = "5511983928497"; 
-      const url = `https://wa.me/${telefone}?text=${mensagem}`;
-      window.open(url, "_blank");
-    }
-  </script>
 </body>
 </html>
