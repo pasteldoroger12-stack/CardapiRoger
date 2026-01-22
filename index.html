@@ -3,101 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pastel e Burger do Roger</title>
+<title>Cardápio Online – Pastel e Batata do Roger</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fff8e7;
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#f2f2f2;
 }
 
-header {
-  background: #f4a300;
-  color: white;
-  text-align: center;
-  padding: 20px;
+header{
+  background:#f4a300;
+  color:#fff;
+  padding:25px;
+  text-align:center;
 }
 
-button {
-  background: #f4a300;
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  border-radius: 8px;
-  cursor: pointer;
+#categorias{
+  display:flex;
+  justify-content:center;
+  padding:30px;
 }
 
-button:hover {
-  background: #d98c00;
+.categoria{
+  background:#fff;
+  width:280px;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);
+  text-align:center;
 }
 
-#categorias {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  padding: 30px;
-  flex-wrap: wrap;
+.categoria button{
+  margin-top:15px;
 }
 
-.categoria {
-  background: white;
-  width: 260px;
-  height: 160px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.menu{
+  display:none;
+  padding:20px;
 }
 
-.menu {
-  display: none;
-  padding: 20px;
+.voltar{
+  margin-bottom:15px;
 }
 
-.item {
-  background: white;
-  padding: 15px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
 }
 
-.preco {
-  font-weight: bold;
-  color: #d98c00;
+.item{
+  background:#fff;
+  border-radius:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+  overflow:hidden;
 }
 
-.voltar {
-  margin-bottom: 15px;
+.item .info{
+  padding:15px;
 }
 
-/* CARRINHO */
-#carrinho {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  margin-top: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,.2);
+.item h3{
+  margin:0 0 5px;
 }
 
-#carrinho ul {
-  list-style: none;
-  padding: 0;
+.item p{
+  margin:0 0 10px;
+  font-size:14px;
+  color:#555;
 }
 
-#carrinho li {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+.preco{
+  font-size:18px;
+  font-weight:bold;
+  color:#f4a300;
 }
 
-.total {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 10px;
+button{
+  background:#f4a300;
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#d98c00;
+}
+
+#carrinho{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  padding:15px;
+  box-shadow:0 -5px 15px rgba(0,0,0,.2);
+  border-radius:20px 20px 0 0;
+}
+
+#lista{
+  list-style:none;
+  padding:0;
+  max-height:150px;
+  overflow:auto;
+}
+
+#lista li{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:6px;
+}
+
+.qtd button{
+  padding:4px 8px;
+}
+
+.total{
+  font-size:20px;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
 }
 </style>
 </head>
@@ -105,10 +140,10 @@ button:hover {
 <body>
 
 <header>
-  <h1>📦 Cardápio Digital – Roger</h1>
+  <h1>🍔 Cardápio Online</h1>
+  <p>Pastel e Batata do Roger</p>
 </header>
 
-<!-- CATEGORIAS -->
 <section id="categorias">
   <div class="categoria">
     <h2>🍔 Burgers</h2>
@@ -116,83 +151,137 @@ button:hover {
   </div>
 </section>
 
-<!-- ================= BURGERS ================= -->
 <section id="burgers" class="menu">
-  <button class="voltar" onclick="voltarCategorias()">⬅ Voltar</button>
-  <h2>🍔 Burgers Gourmet</h2>
+  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
-  <div class="item">
-    <h3>X-Burger</h3>
-    <p>Pão brioche, hambúrguer 180g, queijo e molho da casa</p>
-    <div class="preco">R$ 18,00</div>
-    <button onclick="adicionarCarrinho('X-Burger', 18)">Adicionar</button>
-  </div>
+  <div class="grid">
 
-  <div class="item">
-    <h3>X-Bacon</h3>
-    <p>Pão brioche, hambúrguer 180g, bacon, queijo e molho</p>
-    <div class="preco">R$ 22,00</div>
-    <button onclick="adicionarCarrinho('X-Bacon', 22)">Adicionar</button>
-  </div>
+    <div class="item">
+      <div class="info">
+        <h3>X-Burger</h3>
+        <p>Pão, hambúrguer, queijo e molho especial</p>
+        <div class="preco">R$ 18,00</div>
+        <button onclick="add('X-Burger',18)">Adicionar</button>
+      </div>
+    </div>
 
-  <div class="item">
-    <h3>X-Tudo</h3>
-    <p>Hambúrguer, bacon, ovo, queijo, alface, tomate</p>
-    <div class="preco">R$ 28,00</div>
-    <button onclick="adicionarCarrinho('X-Tudo', 28)">Adicionar</button>
-  </div>
+    <div class="item">
+      <div class="info">
+        <h3>X-Salada</h3>
+        <p>Pão, hambúrguer, queijo, alface e tomate</p>
+        <div class="preco">R$ 20,00</div>
+        <button onclick="add('X-Salada',20)">Adicionar</button>
+      </div>
+    </div>
 
-  <!-- CARRINHO -->
-  <div id="carrinho">
-    <h3>🛒 Carrinho</h3>
-    <ul id="listaCarrinho"></ul>
-    <div class="total">Total: R$ <span id="total">0,00</span></div>
+    <div class="item">
+      <div class="info">
+        <h3>X-Bacon</h3>
+        <p>Pão, hambúrguer, bacon crocante e queijo</p>
+        <div class="preco">R$ 22,00</div>
+        <button onclick="add('X-Bacon',22)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="info">
+        <h3>X-Egg</h3>
+        <p>Pão, hambúrguer, ovo e queijo</p>
+        <div class="preco">R$ 22,00</div>
+        <button onclick="add('X-Egg',22)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="info">
+        <h3>X-Calabresa</h3>
+        <p>Pão, hambúrguer, calabresa e queijo</p>
+        <div class="preco">R$ 23,00</div>
+        <button onclick="add('X-Calabresa',23)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="info">
+        <h3>X-Tudo</h3>
+        <p>Hambúrguer, bacon, ovo, queijo, salada</p>
+        <div class="preco">R$ 28,00</div>
+        <button onclick="add('X-Tudo',28)">Adicionar</button>
+      </div>
+    </div>
+
   </div>
 </section>
 
+<div id="carrinho">
+  <ul id="lista"></ul>
+  <div class="total">Total: R$ <span id="total">0,00</span></div>
+  <input id="nome" placeholder="Nome">
+  <input id="endereco" placeholder="Endereço">
+  <button onclick="finalizar()">📲 Enviar Pedido</button>
+</div>
+
 <script>
-let carrinho = [];
+let carrinho = {};
 
-function abrirMenu(id) {
-  document.getElementById("categorias").style.display = "none";
-  document.querySelectorAll(".menu").forEach(m => m.style.display = "none");
-  document.getElementById(id).style.display = "block";
+function abrirMenu(id){
+  document.getElementById("categorias").style.display="none";
+  document.getElementById(id).style.display="block";
 }
 
-function voltarCategorias() {
-  document.querySelectorAll(".menu").forEach(m => m.style.display = "none");
-  document.getElementById("categorias").style.display = "flex";
+function voltar(){
+  document.getElementById("burgers").style.display="none";
+  document.getElementById("categorias").style.display="flex";
 }
 
-function adicionarCarrinho(nome, preco) {
-  carrinho.push({ nome, preco });
-  atualizarCarrinho();
+function add(nome,preco){
+  if(carrinho[nome]){
+    carrinho[nome].qtd++;
+  }else{
+    carrinho[nome]={preco:preco,qtd:1};
+  }
+  render();
 }
 
-function removerItem(index) {
-  carrinho.splice(index, 1);
-  atualizarCarrinho();
+function alterar(nome,v){
+  carrinho[nome].qtd+=v;
+  if(carrinho[nome].qtd<=0) delete carrinho[nome];
+  render();
 }
 
-function atualizarCarrinho() {
-  const lista = document.getElementById("listaCarrinho");
-  const totalEl = document.getElementById("total");
-  lista.innerHTML = "";
+function render(){
+  let lista=document.getElementById("lista");
+  let total=0;
+  lista.innerHTML="";
+  for(let i in carrinho){
+    total+=carrinho[i].preco*carrinho[i].qtd;
+    lista.innerHTML+=`
+      <li>
+        ${i}
+        <div class="qtd">
+          <button onclick="alterar('${i}',-1)">-</button>
+          ${carrinho[i].qtd}
+          <button onclick="alterar('${i}',1)">+</button>
+        </div>
+      </li>`;
+  }
+  document.getElementById("total").innerText=
+    total.toFixed(2).replace(".",",");
+}
 
-  let total = 0;
-
-  carrinho.forEach((item, index) => {
-    total += item.preco;
-
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${item.nome} - R$ ${item.preco.toFixed(2)}
-      <button onclick="removerItem(${index})">X</button>
-    `;
-    lista.appendChild(li);
-  });
-
-  totalEl.innerText = total.toFixed(2).replace(".", ",");
+function finalizar(){
+  if(Object.keys(carrinho).length===0){
+    alert("Carrinho vazio");
+    return;
+  }
+  let msg="🍔 *Pedido Burgers*%0A";
+  let total=0;
+  for(let i in carrinho){
+    msg+=`- ${i} (${carrinho[i].qtd}x)%0A`;
+    total+=carrinho[i].preco*carrinho[i].qtd;
+  }
+  msg+=`%0A💰 Total: R$ ${total.toFixed(2)}`;
+  window.open(`https://wa.me/5511983928497?text=${msg}`);
 }
 </script>
 
