@@ -3,95 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio Online – Pastel e Batata do Roger</title>
+<title>Cardápio Online - Roger</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial, Helvetica, sans-serif;
-  background:#f2f2f2;
+  background:#f4f4f4;
 }
 
 header{
   background:#f4a300;
   color:#fff;
-  padding:25px;
+  padding:20px;
   text-align:center;
 }
 
-#categorias{
-  display:flex;
-  justify-content:center;
-  padding:30px;
-}
-
-.categoria{
-  background:#fff;
-  width:280px;
-  padding:30px;
-  border-radius:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,.2);
-  text-align:center;
-}
-
-.categoria button{
-  margin-top:15px;
-}
-
-.menu{
-  display:none;
+section{
   padding:20px;
 }
 
-.voltar{
-  margin-bottom:15px;
-}
+.hidden{display:none;}
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:20px;
+  gap:15px;
 }
 
-.item{
+.card{
   background:#fff;
-  border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,.1);
-  overflow:hidden;
-}
-
-.item .info{
+  border-radius:12px;
   padding:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
-.item h3{
-  margin:0 0 5px;
-}
-
-.item p{
-  margin:0 0 10px;
-  font-size:14px;
-  color:#555;
-}
-
-.preco{
-  font-size:18px;
-  font-weight:bold;
-  color:#f4a300;
-}
+.card h3{margin:0;}
+.card p{font-size:14px;color:#555;}
+.preco{font-weight:bold;color:#f4a300;font-size:18px;}
 
 button{
   background:#f4a300;
   color:#fff;
   border:none;
-  padding:10px 14px;
-  border-radius:10px;
+  padding:10px;
+  border-radius:8px;
   cursor:pointer;
+  width:100%;
 }
 
-button:hover{
-  background:#d98c00;
-}
+button:hover{background:#d98c00;}
 
 #carrinho{
   position:fixed;
@@ -101,13 +62,12 @@ button:hover{
   background:#fff;
   padding:15px;
   box-shadow:0 -5px 15px rgba(0,0,0,.2);
-  border-radius:20px 20px 0 0;
 }
 
 #lista{
   list-style:none;
   padding:0;
-  max-height:150px;
+  max-height:120px;
   overflow:auto;
 }
 
@@ -118,21 +78,30 @@ button:hover{
 }
 
 .qtd button{
-  padding:4px 8px;
+  padding:3px 8px;
 }
 
 .total{
-  font-size:20px;
+  font-size:18px;
   font-weight:bold;
-  margin:10px 0;
+  margin-top:10px;
 }
 
-input{
+input, select{
   width:100%;
   padding:10px;
-  margin:5px 0;
-  border-radius:8px;
+  margin-top:6px;
+  border-radius:6px;
   border:1px solid #ccc;
+}
+
+.qr{
+  text-align:center;
+}
+
+.qr img{
+  width:200px;
+  margin:10px 0;
 }
 </style>
 </head>
@@ -144,102 +113,74 @@ input{
   <p>Pastel e Batata do Roger</p>
 </header>
 
-<section id="categorias">
-  <div class="categoria">
-    <h2>🍔 Burgers</h2>
-    <button onclick="abrirMenu('burgers')">Ver Cardápio</button>
-  </div>
-</section>
-
-<section id="burgers" class="menu">
-  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
-
+<!-- CARDÁPIO -->
+<section id="menu">
+  <h2>Burgers</h2>
   <div class="grid">
 
-    <div class="item">
-      <div class="info">
-        <h3>X-Burger</h3>
-        <p>Pão, hambúrguer, queijo e molho especial</p>
-        <div class="preco">R$ 18,00</div>
-        <button onclick="add('X-Burger',18)">Adicionar</button>
-      </div>
+    <div class="card">
+      <h3>X-Burger</h3>
+      <p>Pão, hambúrguer, queijo e molho</p>
+      <div class="preco">R$ 18,00</div>
+      <button onclick="add('X-Burger',18)">Adicionar</button>
     </div>
 
-    <div class="item">
-      <div class="info">
-        <h3>X-Salada</h3>
-        <p>Pão, hambúrguer, queijo, alface e tomate</p>
-        <div class="preco">R$ 20,00</div>
-        <button onclick="add('X-Salada',20)">Adicionar</button>
-      </div>
+    <div class="card">
+      <h3>X-Bacon</h3>
+      <p>Hambúrguer, bacon e queijo</p>
+      <div class="preco">R$ 22,00</div>
+      <button onclick="add('X-Bacon',22)">Adicionar</button>
     </div>
 
-    <div class="item">
-      <div class="info">
-        <h3>X-Bacon</h3>
-        <p>Pão, hambúrguer, bacon crocante e queijo</p>
-        <div class="preco">R$ 22,00</div>
-        <button onclick="add('X-Bacon',22)">Adicionar</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="info">
-        <h3>X-Egg</h3>
-        <p>Pão, hambúrguer, ovo e queijo</p>
-        <div class="preco">R$ 22,00</div>
-        <button onclick="add('X-Egg',22)">Adicionar</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="info">
-        <h3>X-Calabresa</h3>
-        <p>Pão, hambúrguer, calabresa e queijo</p>
-        <div class="preco">R$ 23,00</div>
-        <button onclick="add('X-Calabresa',23)">Adicionar</button>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="info">
-        <h3>X-Tudo</h3>
-        <p>Hambúrguer, bacon, ovo, queijo, salada</p>
-        <div class="preco">R$ 28,00</div>
-        <button onclick="add('X-Tudo',28)">Adicionar</button>
-      </div>
+    <div class="card">
+      <h3>X-Tudo</h3>
+      <p>Hambúrguer, bacon, ovo, queijo e salada</p>
+      <div class="preco">R$ 28,00</div>
+      <button onclick="add('X-Tudo',28)">Adicionar</button>
     </div>
 
   </div>
 </section>
 
+<!-- PAGAMENTO PIX -->
+<section id="pix" class="hidden">
+  <h2>Pagamento via PIX</h2>
+
+  <div class="qr">
+    <!-- SUBSTITUA PELA IMAGEM DO SEU QR CODE -->
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=CHAVE_PIX_AQUI">
+    <p><strong>Chave PIX:</strong><br> 11983928497</p>
+    <p><strong>Valor:</strong> R$ <span id="valorPix"></span></p>
+  </div>
+
+  <button onclick="confirmarPix()">✅ Já fiz o PIX</button>
+</section>
+
+<!-- CARRINHO -->
 <div id="carrinho">
   <ul id="lista"></ul>
   <div class="total">Total: R$ <span id="total">0,00</span></div>
+
   <input id="nome" placeholder="Nome">
   <input id="endereco" placeholder="Endereço">
-  <button onclick="finalizar()">📲 Enviar Pedido</button>
+
+  <select id="pagamento">
+    <option value="">Forma de pagamento</option>
+    <option value="Dinheiro">Dinheiro</option>
+    <option value="Cartão">Cartão</option>
+    <option value="PIX">PIX</option>
+  </select>
+
+  <button onclick="finalizar()">Finalizar Pedido</button>
 </div>
 
 <script>
-let carrinho = {};
-
-function abrirMenu(id){
-  document.getElementById("categorias").style.display="none";
-  document.getElementById(id).style.display="block";
-}
-
-function voltar(){
-  document.getElementById("burgers").style.display="none";
-  document.getElementById("categorias").style.display="flex";
-}
+let carrinho={};
 
 function add(nome,preco){
-  if(carrinho[nome]){
-    carrinho[nome].qtd++;
-  }else{
-    carrinho[nome]={preco:preco,qtd:1};
-  }
+  carrinho[nome]=carrinho[nome]
+    ? {...carrinho[nome],qtd:carrinho[nome].qtd+1}
+    : {preco,qtd:1};
   render();
 }
 
@@ -265,22 +206,38 @@ function render(){
         </div>
       </li>`;
   }
-  document.getElementById("total").innerText=
-    total.toFixed(2).replace(".",",");
+  document.getElementById("total").innerText=total.toFixed(2).replace(".",",");
 }
 
 function finalizar(){
-  if(Object.keys(carrinho).length===0){
-    alert("Carrinho vazio");
+  let pagamento=document.getElementById("pagamento").value;
+  if(!pagamento){
+    alert("Escolha a forma de pagamento");
     return;
   }
-  let msg="🍔 *Pedido Burgers*%0A";
+  if(pagamento==="PIX"){
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("pix").classList.remove("hidden");
+    document.getElementById("valorPix").innerText=
+      document.getElementById("total").innerText;
+  }else{
+    enviarWhatsApp("Pagamento: "+pagamento);
+  }
+}
+
+function confirmarPix(){
+  enviarWhatsApp("Pagamento: PIX (já enviado)");
+}
+
+function enviarWhatsApp(pagamento){
+  let msg="🛒 *Pedido Online*%0A";
   let total=0;
   for(let i in carrinho){
     msg+=`- ${i} (${carrinho[i].qtd}x)%0A`;
     total+=carrinho[i].preco*carrinho[i].qtd;
   }
   msg+=`%0A💰 Total: R$ ${total.toFixed(2)}`;
+  msg+=`%0A💳 ${pagamento}`;
   window.open(`https://wa.me/5511983928497?text=${msg}`);
 }
 </script>
