@@ -3,160 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pastel e Batata do Roger</title>
+<title>Cardápio</title>
 
 <style>
-body{font-family:Arial;background:#fff8e7;margin:0}
-header{background:#f4a300;color:#fff;text-align:center;padding:15px}
-h2{margin-top:25px}
-button{background:#f4a300;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
-button:hover{background:#d98c00}
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #111;
+  color: #fff;
+}
 
-.tela,.menu{display:none;padding:15px}
-.ativo{display:block}
+/* Tela categorias */
+.categorias {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
 
-.item{background:#fff;margin:8px 0;padding:10px;border-radius:8px;
-display:flex;justify-content:space-between;align-items:center;
-box-shadow:0 2px 5px rgba(0,0,0,.1)}
+.categorias h1 {
+  margin-bottom: 20px;
+}
 
-.price{font-weight:bold;margin-right:10px}
+.categorias button {
+  width: 100%;
+  max-width: 320px;
+  padding: 15px;
+  margin: 10px 0;
+  font-size: 18px;
+  background: #ff8c00;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-.carrinho{background:#fff;padding:15px;border-radius:10px;margin:15px}
-.carrinho ul{list-style:none;padding:0}
-.carrinho li{display:flex;justify-content:space-between;align-items:center;margin:6px 0}
+/* Cardápios */
+.menu {
+  display: none;
+  padding: 20px;
+}
 
-.controles button{padding:4px 8px}
-.total{font-size:18px;font-weight:bold;margin-top:10px}
+.menu.ativo {
+  display: block;
+}
 
-input,select{width:100%;padding:8px;margin:6px 0;border-radius:5px;border:1px solid #ccc}
+.voltar {
+  background: #ff8c00;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Itens */
+.item {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.item h3 {
+  margin: 0;
+  color: #ff8c00;
+}
+
+.item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.preco {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>📦 Pastel e Batata do Roger</h1>
-</header>
-
-<!-- TELA CATEGORIAS -->
-<section id="categorias" class="tela ativo">
-<h2>📋 Escolha o cardápio</h2>
-<button onclick="abrir('pasteis')">🥟 Pastéis</button><br><br>
-<button onclick="abrir('combos')">🍔 Combos</button><br><br>
-<button onclick="abrir('pizzinha')">🍕 Pizzinha</button>
+<!-- TELA DE CATEGORIAS -->
+<section class="categorias" id="categorias">
+  <h1>Escolha uma categoria</h1>
+  <button onclick="abrirMenu('burgers')">🍔 Burgers</button>
 </section>
 
-<!-- PASTEIS -->
-<section id="pasteis" class="menu">
-<button onclick="voltar()">⬅ Voltar</button>
+<!-- BURGERS -->
+<section class="menu" id="burgers">
+  <button class="voltar" onclick="voltar()">⬅ Voltar</button>
 
-<h2>🥟 Pastéis Salgados</h2>
-<div class="item"><span>Carne</span><span class="price">10</span><button onclick="add('Carne',10)">+</button></div>
-<div class="item"><span>Carne c/ Queijo</span><span class="price">10</span><button onclick="add('Carne c/ Queijo',10)">+</button></div>
-<div class="item"><span>Carne c/ Cheddar</span><span class="price">10</span><button onclick="add('Carne c/ Cheddar',10)">+</button></div>
-<div class="item"><span>Carne c/ Catupiry</span><span class="price">13</span><button onclick="add('Carne c/ Catupiry',13)">+</button></div>
-<div class="item"><span>Carne c/ Cheddar e Catupiry</span><span class="price">13</span><button onclick="add('Carne c/ Cheddar e Catupiry',13)">+</button></div>
-<div class="item"><span>Bauru</span><span class="price">10</span><button onclick="add('Bauru',10)">+</button></div>
-<div class="item"><span>Queijo</span><span class="price">10</span><button onclick="add('Queijo',10)">+</button></div>
-<div class="item"><span>Calabresa c/ Queijo</span><span class="price">10</span><button onclick="add('Calabresa c/ Queijo',10)">+</button></div>
-<div class="item"><span>Calabresa c/ Cheddar</span><span class="price">10</span><button onclick="add('Calabresa c/ Cheddar',10)">+</button></div>
-<div class="item"><span>Calabresa c/ Catupiry</span><span class="price">13</span><button onclick="add('Calabresa c/ Catupiry',13)">+</button></div>
-<div class="item"><span>Dois Queijos</span><span class="price">10</span><button onclick="add('Dois Queijos',10)">+</button></div>
-<div class="item"><span>Três Queijos</span><span class="price">13</span><button onclick="add('Três Queijos',13)">+</button></div>
-<div class="item"><span>Frango c/ Queijo</span><span class="price">13</span><button onclick="add('Frango c/ Queijo',13)">+</button></div>
-<div class="item"><span>Frango c/ Catupiry</span><span class="price">13</span><button onclick="add('Frango c/ Catupiry',13)">+</button></div>
-<div class="item"><span>Frango c/ Cheddar</span><span class="price">13</span><button onclick="add('Frango c/ Cheddar',13)">+</button></div>
-<div class="item"><span>Frango c/ Cheddar e Catupiry</span><span class="price">15</span><button onclick="add('Frango c/ Cheddar e Catupiry',15)">+</button></div>
-<div class="item"><span>Frango c/ Queijo e Catupiry</span><span class="price">15</span><button onclick="add('Frango c/ Queijo e Catupiry',15)">+</button></div>
+  <h2>BURGERS TRADICIONAIS</h2>
 
-<h2>🍫 Doces</h2>
-<div class="item"><span>Brigadeiro</span><span class="price">15</span><button onclick="add('Brigadeiro',15)">+</button></div>
-<div class="item"><span>Prestígio</span><span class="price">15</span><button onclick="add('Prestígio',15)">+</button></div>
-<div class="item"><span>Sensação</span><span class="price">15</span><button onclick="add('Sensação',15)">+</button></div>
-</section>
+  <div class="item">
+    <h3>X-BURGUER</h3>
+    <p>Hambúrguer, mussarela e molho especial</p>
+    <div class="preco">R$ 16</div>
+  </div>
 
-<!-- COMBOS -->
-<section id="combos" class="menu">
-<button onclick="voltar()">⬅ Voltar</button>
-<h2>🍔 Combos</h2>
+  <div class="item">
+    <h3>X-BACON</h3>
+    <p>Hambúrguer, mussarela, bacon e molho especial</p>
+    <div class="preco">R$ 19</div>
+  </div>
 
-<div class="item"><span>X-Burguer + Batata + Refri</span><span class="price">32</span><button onclick="add('Combo X-Burguer',32)">+</button></div>
-<div class="item"><span>X-Salada + Batata + Refri</span><span class="price">33</span><button onclick="add('Combo X-Salada',33)">+</button></div>
-<div class="item"><span>X-Bacon + Batata + Refri</span><span class="price">35</span><button onclick="add('Combo X-Bacon',35)">+</button></div>
-</section>
+  <div class="item">
+    <h3>X-SALADA</h3>
+    <p>Hambúrguer, mussarela, alface, tomate, cebola e molho especial</p>
+    <div class="preco">R$ 17</div>
+  </div>
 
-<!-- PIZZINHA -->
-<section id="pizzinha" class="menu">
-<button onclick="voltar()">⬅ Voltar</button>
-<h2>🍕 Pizzinha</h2>
+  <div class="item">
+    <h3>BIG TASTY</h3>
+    <p>Hambúrguer, mussarela, alface, tomate, cebola e molho tasty</p>
+    <div class="preco">R$ 23</div>
+  </div>
 
-<div class="item"><span>Mussarela</span><span class="price">7.99</span><button onclick="add('Pizzinha Mussarela',7.99)">+</button></div>
-<div class="item"><span>Calabresa c/ Queijo</span><span class="price">10</span><button onclick="add('Pizzinha Calabresa',10)">+</button></div>
-<div class="item"><span>Frango c/ Catupiry</span><span class="price">15</span><button onclick="add('Pizzinha Frango',15)">+</button></div>
-<div class="item"><span>Bauru</span><span class="price">13</span><button onclick="add('Pizzinha Bauru',13)">+</button></div>
-<div class="item"><span>Pepperoni</span><span class="price">17</span><button onclick="add('Pizzinha Pepperoni',17)">+</button></div>
-</section>
+  <div class="item">
+    <h3>CHEDDAR</h3>
+    <p>Hambúrguer, queijo cheddar e cebola caramelizada</p>
+    <div class="preco">R$ 21</div>
+  </div>
 
-<!-- CARRINHO -->
-<section class="carrinho">
-<h2>🛒 Carrinho</h2>
-<ul id="lista"></ul>
-<p class="total">Total: R$ <span id="total">0,00</span></p>
+  <h2>BURGERS GOURMET <small>(Hambúrguer de carne 180g)</small></h2>
 
-<select id="tipo" onchange="calc()">
-<option value="retirada">Retirada</option>
-<option value="entrega">Entrega (+3)</option>
-</select>
+  <div class="item">
+    <h3>CLASSIC BURGUER</h3>
+    <p>Hambúrguer, queijo cheddar, catupiry, alface, tomate, cebola roxa e maionese da casa</p>
+    <div class="preco">R$ 35</div>
+  </div>
 
-<input id="nome" placeholder="Nome">
-<input id="endereco" placeholder="Endereço">
+  <div class="item">
+    <h3>BACON BURGUER</h3>
+    <p>Hambúrguer, bacon crocante, cheddar cremoso, molho barbecue, tomate e cebola roxa</p>
+    <div class="preco">R$ 45</div>
+  </div>
 
-<button onclick="whats()">📲 Enviar WhatsApp</button>
+  <div class="item">
+    <h3>TURBO CHEDDAR</h3>
+    <p>Dois hambúrgueres, queijo cheddar, mussarela, pepperone, molho cheddar, cebola caramelizada, tomate e barbecue</p>
+    <div class="preco">R$ 51</div>
+  </div>
+
+  <div class="item">
+    <h3>MEGA TRIPLO TASTY</h3>
+    <p>Três hambúrgueres, queijo cheddar, muito bacon, alface, tomate, cebola roxa e molho tasty</p>
+    <div class="preco">R$ 63</div>
+  </div>
+
+  <h2>ACOMPANHAMENTOS</h2>
+
+  <div class="item"><h3>Batata P</h3><div class="preco">R$ 10</div></div>
+  <div class="item"><h3>Batata M</h3><div class="preco">R$ 20</div></div>
+  <div class="item"><h3>Batata G</h3><div class="preco">R$ 25</div></div>
+  <div class="item"><h3>Batata M (cheddar e bacon)</h3><div class="preco">R$ 32</div></div>
+  <div class="item"><h3>Batata G (cheddar e bacon)</h3><div class="preco">R$ 38</div></div>
+
+  <h2>ADICIONAIS</h2>
+
+  <div class="item"><h3>Hambúrguer de carne 180g</h3><div class="preco">R$ 10</div></div>
+  <div class="item"><h3>Queijo cheddar ou mussarela</h3></div>
+  <div class="item"><h3>Cheddar ou catupiry</h3></div>
+  <div class="item"><h3>Pepperoni</h3></div>
+  <div class="item"><h3>Maionese da casa</h3></div>
 </section>
 
 <script>
-let carrinho={}
-
-function abrir(id){
-document.querySelectorAll('.menu,.tela').forEach(e=>e.classList.remove('ativo'))
-document.getElementById(id).classList.add('ativo')
+function abrirMenu(id) {
+  document.getElementById("categorias").style.display = "none";
+  document.getElementById(id).classList.add("ativo");
 }
 
-function voltar(){
-document.querySelectorAll('.menu').forEach(e=>e.classList.remove('ativo'))
-document.getElementById('categorias').classList.add('ativo')
-}
-
-function add(nome,preco){
-carrinho[nome]?carrinho[nome].q++:carrinho[nome]={q:1,p:preco}
-render()
-}
-
-function render(){
-let lista=document.getElementById('lista')
-lista.innerHTML=''
-let total=0
-for(let i in carrinho){
-let li=document.createElement('li')
-li.innerHTML=`${i} (${carrinho[i].q}x) 
-<button onclick="menos('${i}')">-</button>
-<button onclick="mais('${i}')">+</button>`
-lista.appendChild(li)
-total+=carrinho[i].q*carrinho[i].p
-}
-if(document.getElementById('tipo').value=='entrega') total+=3
-document.getElementById('total').innerText=total.toFixed(2).replace('.',',')
-}
-
-function mais(i){carrinho[i].q++;render()}
-function menos(i){carrinho[i].q--; if(carrinho[i].q<=0) delete carrinho[i];render()}
-function calc(){render()}
-
-function whats(){
-let msg="📦 Pedido Pastel do Roger%0A"
-for(let i in carrinho) msg+=`- ${i} (${carrinho[i].q}x)%0A`
-msg+=`💰 Total: R$ ${document.getElementById('total').innerText}`
-window.open(`https://wa.me/5511983928497?text=${msg}`)
+function voltar() {
+  document.querySelectorAll(".menu").forEach(m => m.classList.remove("ativo"));
+  document.getElementById("categorias").style.display = "flex";
 }
 </script>
 
